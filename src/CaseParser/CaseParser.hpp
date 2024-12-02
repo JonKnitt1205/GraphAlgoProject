@@ -17,7 +17,7 @@ public:
     ~CaseParser();
     
     // initializes the adj list
-    void parseCase(const std::string& inputFile);
+    void parseCase(const std::string& inputFile, bool randomDistances);
 
     const AdjList& getAdjList();
 private:
@@ -25,7 +25,7 @@ private:
     void loadPositions(const std::string& inputFile, std::vector<std::pair<uint32_t, uint32_t>>* positions_p);
 
     // using the loaded positions, load the edges into the adj list
-    void loadEdges(const std::string& inputFile, std::vector<std::pair<uint32_t, uint32_t>>* positions_p);
+    void loadEdges(const std::string& inputFile, std::vector<std::pair<uint32_t, uint32_t>>* positions_p, bool randomDistances);
 
     // find the distance between two nodes
     double getDistance(size_t node1, size_t node2, std::vector<std::pair<uint32_t, uint32_t>>* positions_p);

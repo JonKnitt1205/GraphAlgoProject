@@ -8,13 +8,13 @@ CaseParser::~CaseParser() {
     delete m_adjlist_p;
 }
 
-void CaseParser::parseCase(const std::string& inputFile) {
+void CaseParser::parseCase(const std::string& inputFile, bool randomDistances) {
     m_adjlist_p->clear();
 
     std::vector<std::pair<uint32_t, uint32_t>>* positions_p = new std::vector<std::pair<uint32_t, uint32_t>>;
     
     loadPositions(inputFile, positions_p);
-    loadEdges(inputFile, positions_p);
+    loadEdges(inputFile, positions_p, randomDistances);
 
     delete positions_p;
 }
@@ -38,7 +38,7 @@ void CaseParser::loadPositions(const std::string& inputFile, std::vector<std::pa
     }
 }
 
-void CaseParser::loadEdges(const std::string& inputFile, std::vector<std::pair<uint32_t, uint32_t>>* positions_p) {
+void CaseParser::loadEdges(const std::string& inputFile, std::vector<std::pair<uint32_t, uint32_t>>* positions_p, bool randomDistances) {
     std::ifstream input(inputFile);
     std::string line;
     while(getline(input, line)) {
@@ -51,7 +51,10 @@ void CaseParser::loadEdges(const std::string& inputFile, std::vector<std::pair<u
 
         while(next[0] != '\0') {
             size_t node2 = strtol(next, &next, 10);
-            e->push_back({node2, getDistance(node1, node2, positions_p)});
+            double distance = getDistance(node1, node2, positions_p);
+            if(randomDistances) { distance = rand() % 1000 + 1; }
+
+            e->push_back({node2, distance});
         }
 
         m_adjlist_p->push_back(*e);

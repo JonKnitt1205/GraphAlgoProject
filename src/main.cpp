@@ -17,7 +17,8 @@ void printAllEdges(const std::vector<std::vector<GraphEdge>>& adjList) {
 int main() {
     createCase();
     CaseParser parser;
-    parser.parseCase("Output/test.txt");
+    bool randomDistances = true;
+    parser.parseCase("Output/test.txt", randomDistances);
 
     const std::vector<std::vector<GraphEdge>>& adjList = parser.getAdjList();
     
