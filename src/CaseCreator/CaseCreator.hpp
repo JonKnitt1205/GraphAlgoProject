@@ -42,6 +42,8 @@ private:
     void putCaseIntoFile(const std::string& filename);
 
     void BFS(std::queue<uint32_t>* q_p, std::unordered_set<u_int32_t>* unseen_p, uint32_t node);
+
+    bool isValid();
 private:
     std::vector<std::unordered_set<uint32_t>>* m_adjlist_p;
     std::vector<std::pair<uint32_t, uint32_t>>* m_coords_p;

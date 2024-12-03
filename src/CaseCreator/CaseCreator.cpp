@@ -1,4 +1,5 @@
 #include "CaseCreator.hpp"
+#include <cassert>
 
 CaseCreator::CaseCreator(){
     m_adjlist_p = new std::vector<std::unordered_set<uint32_t>>;
@@ -19,6 +20,7 @@ void CaseCreator::createTestCase(uint32_t nodeCount, uint32_t suggestedMaxOutgoi
     // std::cout << "created nodes now making graph traversable from any start node" << std::endl;
     // for(uint32_t n = 0; n < m_nodeCount; n++) { makeCaseConnected(n); }
     makeCaseConnected(0);
+    if(!isValid()) { assert(false); }
     putCaseIntoFile(outputFileName);
 }
 
@@ -113,4 +115,18 @@ void CaseCreator::BFS(std::queue<uint32_t>* q_p, std::unordered_set<u_int32_t>* 
             q_p->push(next);
         }
     }
+}
+
+bool CaseCreator::isValid() {
+    std::queue<uint32_t> q;
+    q.push(0);
+    std::unordered_set<uint32_t> seen;
+    while(!q.empty()) {
+        uint32_t n = q.front();
+        q.pop();
+        if(seen.count(n)) { continue; }
+        seen.insert(n);
+        for(uint32_t child : m_adjlist_p->at(n)) { q.push(child); }
+    }
+    return seen.size() == m_nodeCount;
 }
