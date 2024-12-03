@@ -8,7 +8,7 @@ int main(int argc, char* argv[]) {
     }
     
     uint32_t randomSeed = time(NULL);
-    if(argc > 4) { randomSeed = std::strtoul(argv[3], nullptr, 10); }
+    if(argc > 4) { randomSeed = std::strtoul(argv[4], nullptr, 10); }
     uint32_t nodeCount = std::strtoul(argv[1], nullptr, 10);
     uint32_t suggestedMaxOutgoing = std::strtoul(argv[2], nullptr, 10);
     std::string filepath =  argv[3];
