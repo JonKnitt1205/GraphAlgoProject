@@ -14,6 +14,13 @@ void printAllEdges(const std::vector<std::vector<GraphEdge>>& adjList) {
     }
 }
 
+void printAllPositions(const std::vector<std::pair<uint32_t, uint32_t>>& positions) {
+    for(size_t i = 0; i < positions.size(); i++) {
+        std::cout << "Node " << i << " is at (" << positions.at(i).first;
+        std::cout << ", "  << positions.at(i).second << ")" << std::endl;
+    }
+}
+
 int main() {
     createCase();
     CaseParser parser;
@@ -21,9 +28,11 @@ int main() {
     parser.parseCase("Output/test.txt", randomDistances);
 
     const std::vector<std::vector<GraphEdge>>& adjList = parser.getAdjList();
+    const std::vector<std::pair<uint32_t, uint32_t>>& positions = parser.getPositions();
     
     // print all edges just to prove it all worked lol
     printAllEdges(adjList);
+    printAllPositions(positions);
 
     // here you would call the algos
 }
