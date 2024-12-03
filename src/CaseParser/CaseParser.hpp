@@ -2,14 +2,7 @@
 
 #include <vector>
 #include <fstream>
-
-typedef struct {
-    size_t dest;
-    double cost;
-} GraphEdge;
-
-typedef std::vector<GraphEdge> EdgeList;
-typedef std::vector<EdgeList> AdjList;
+#include "GraphTypes.hpp"
 
 class CaseParser {
 public:
@@ -21,7 +14,7 @@ public:
 
     const std::vector<std::pair<uint32_t, uint32_t>>& getPositions();
 
-    const AdjList& getAdjList();
+    const Graph::AdjList& getAdjList();
 private:
     // load the positions from the file
     void loadPositions(const std::string& inputFile);
@@ -33,6 +26,6 @@ private:
     double getDistance(size_t node1, size_t node2);
 
 private:
-    AdjList*  m_adjlist_p;
+    Graph::AdjList*  m_adjlist_p;
     std::vector<std::pair<uint32_t, uint32_t>>* m_positions_p;
 };

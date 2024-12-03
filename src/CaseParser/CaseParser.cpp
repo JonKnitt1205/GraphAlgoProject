@@ -1,7 +1,7 @@
 #include "CaseParser.hpp"
 
 CaseParser::CaseParser() {
-    m_adjlist_p = new AdjList;
+    m_adjlist_p = new Graph::AdjList;
     m_positions_p = new std::vector<std::pair<uint32_t, uint32_t>>;
 }
 
@@ -22,7 +22,7 @@ const std::vector<std::pair<uint32_t, uint32_t>>& CaseParser::getPositions() {
     return *m_positions_p;
 }
 
-const AdjList& CaseParser::getAdjList() {
+const Graph::AdjList& CaseParser::getAdjList() {
     return *m_adjlist_p;
 }
 
@@ -45,7 +45,7 @@ void CaseParser::loadEdges(const std::string& inputFile, bool randomDistances) {
     std::ifstream input(inputFile);
     std::string line;
     while(getline(input, line)) {
-        EdgeList* e = new EdgeList;
+        Graph::EdgeList* e = new Graph::EdgeList;
 
         char* next;
         size_t node1 = strtol(line.c_str(), &next, 10);
