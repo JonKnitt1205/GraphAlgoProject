@@ -73,16 +73,7 @@ void CaseCreator::makeCaseConnected(uint32_t node) {
 
     // bfs
     std::queue<uint32_t>* q_p = new std::queue<uint32_t>;
-    q_p->push(node);
-    while(!q_p->empty()) {
-        uint32_t n = q_p->front();
-        q_p->pop();
-        unseen_p->erase(n);
-        if(!unseen_p->count(n)) { continue; }
-        for(int next : m_adjlist_p->at(n)) {
-            q_p->push(next);
-        }
-    }
+    BFS(q_p, unseen_p, node);
 
     // give the unseen nodes seen parents
     while(!unseen_p->empty()) {
@@ -93,7 +84,7 @@ void CaseCreator::makeCaseConnected(uint32_t node) {
         // make sure randomly chosen node is not unseen and is not itself
         } while(unseen_p->count(source) || source == *it);
         m_adjlist_p->at(source).insert(*it);
-        unseen_p->erase(it);
+        BFS(q_p, unseen_p, *it);
     }
 
     delete unseen_p;
@@ -108,5 +99,18 @@ void CaseCreator::putCaseIntoFile(const std::string& filename) {
             output << ' ' << neighbor;
         }
         output << std::endl;
+    }
+}
+
+void CaseCreator::BFS(std::queue<uint32_t>* q_p, std::unordered_set<u_int32_t>* unseen_p, uint32_t node) {
+    q_p->push(node);
+    while(!q_p->empty()) {
+        uint32_t n = q_p->front();
+        q_p->pop();
+        if(!unseen_p->count(n)) { continue; }
+        unseen_p->erase(n);
+        for(uint32_t next : m_adjlist_p->at(n)) {
+            q_p->push(next);
+        }
     }
 }
