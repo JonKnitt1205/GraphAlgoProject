@@ -1,7 +1,6 @@
 #include "AStar.hpp"
 
-#include <map>
-#include <queue>
+#include <iostream>
 
 bool AStar::oneIteration(uint32_t destNode, std::priority_queue<uint32_t, std::vector<uint32_t>, Compare>& openSet, const Graph::AdjList& adjList, 
 std::unordered_map<uint32_t, double>& gScores, std::unordered_map<uint32_t, double>& fScores, std::vector<size_t>& parents, const Graph::PosList& positions) 
@@ -27,7 +26,7 @@ std::unordered_map<uint32_t, double>& gScores, std::unordered_map<uint32_t, doub
 
 void AStar::initScores(std::unordered_map<uint32_t, double> &gScores, std::unordered_map<uint32_t, double> &fScores, const Graph::PosList &positions)
 {
-    for (size_t i = 0; i < positions.size(); ++i) {
+    for (size_t i = 0; i < positions.size(); i++) {
         gScores[i] = Graph::INFDISTANCE;
         fScores[i] = Graph::INFDISTANCE;
     }
@@ -42,9 +41,17 @@ double AStar::getHeuristic(uint32_t curr, uint32_t dest, const Graph::PosList &p
     return sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
 }
 
+void AStar::initParents(std::vector<size_t>& parents, uint32_t size) {
+    parents.clear();
+    parents.resize(size);
+    for(uint32_t i = 0; i < size; i++) { parents.at(i) = i; }
+}
+
 void AStar::getPath(const Graph::AdjList& adjList, const Graph::PosList& positions, std::vector<double>& distance, std::vector<size_t>& parents, uint32_t destNode) {
     std::unordered_map<uint32_t, double> fScores;
     std::unordered_map<uint32_t, double> gScores;
+    initScores(gScores, fScores, positions);
+    initParents(parents, adjList.size());
 
     gScores.at(0) = 0;
     fScores.at(0) = getHeuristic(0, destNode, positions);

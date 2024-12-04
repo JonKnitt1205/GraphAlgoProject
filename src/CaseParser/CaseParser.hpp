@@ -10,7 +10,7 @@ public:
     ~CaseParser();
     
     // initializes the adj list
-    void parseCase(const std::string& inputFile, bool randomDistances);
+    void parseCase(const std::string& inputFile, bool randomDistances = false);
 
     const std::vector<std::pair<uint32_t, uint32_t>>& getPositions();
 

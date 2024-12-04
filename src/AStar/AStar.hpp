@@ -1,6 +1,8 @@
 #pragma once
 
 #include "GraphTypes.hpp"
+#include <map>
+#include <queue>
 
 class AStar {
 public:
@@ -28,4 +30,6 @@ private:
 
     // gets the heuristic using euclidean distance
     static double getHeuristic(uint32_t currNode, uint32_t dest, const Graph::PosList& positions);
+
+    static void initParents(std::vector<size_t>& parents, uint32_t size);
 };
