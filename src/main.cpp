@@ -39,16 +39,17 @@ void testAStar(const Graph::AdjList& adjlist, const Graph::PosList& positions, u
 
 int main() {
     CaseParser parser;
-    parser.parseCase("TestCases/slidesExample.txt");
+    parser.parseCase("TestCases/largeSparse.txt");
+    std::cout << "parsed the test case" << std::endl;
     const Graph::AdjList& adjlist = parser.getAdjList();
     const Graph::PosList& positions = parser.getPositions();
 
     srand(time(0));
     uint32_t destination = rand() % (adjlist.size() - 1) + 1;
 
-    double bftime = timer(&testBF, adjlist, destination);
     double Atime = timer(&testAStar, adjlist, positions, destination);
+    double bftime = timer(&testBF, adjlist, destination);
 
-    std::cout << "BFTime: " << bftime << "ms" << std::endl;
     std::cout << "ATime: " << Atime << "ms" << std::endl;
+    std::cout << "BFTime: " << bftime << "ms" << std::endl;
 }
