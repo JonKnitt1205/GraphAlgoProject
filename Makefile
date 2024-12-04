@@ -36,6 +36,9 @@ ${o_dir}/CaseCreator.o: ${s_dir}/CaseCreator/CaseCreator.cpp ${s_dir}/CaseCreato
 ${o_dir}/BellmanFord.o: ${s_dir}/BellmanFord/BellmanFord.cpp ${s_dir}/BellmanFord/BellmanFord.hpp ${s_dir}/Util/GraphTypes.hpp
 	${build_objects_cmd}
 
+${o_dir}/AStar.o: ${s_dir}/AStar/AStar.cpp ${s_dir}/AStar/AStar.hpp ${s_dir}/Util/GraphTypes.hpp
+	${build_objects_cmd}
+
 # clean and remove temp files
 clean:
 	@rm -f ${output_dir}/*.txt
