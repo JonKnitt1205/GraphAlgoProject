@@ -21,7 +21,7 @@ ${exe_name2}: ${o_dir}/main.o ${o_dir}/CaseParser.o ${o_dir}/BellmanFord.o ${o_d
 	${link_cmd}
 
 # create object files
-${o_dir}/main.o: ${s_dir}/main.cpp ${s_dir}/CaseParser/CaseParser.hpp ${s_dir}/BellmanFord/BellmanFord.hpp ${s_dir}/AStar/AStar.hpp ${s_dir}/Util/GraphTypes.hpp
+${o_dir}/main.o: ${s_dir}/main.cpp ${s_dir}/CaseParser/CaseParser.hpp ${s_dir}/BellmanFord/BellmanFord.hpp ${s_dir}/AStar/AStar.hpp ${s_dir}/Util/GraphTypes.hpp ${s_dir}/Util/FunctionTimer.hpp
 	${build_objects_cmd}
 
 ${o_dir}/CaseCreatorMain.o: ${s_dir}/CaseCreator/main.cpp ${s_dir}/CaseCreator/CaseCreator.hpp ${s_dir}/Util/GraphTypes.hpp

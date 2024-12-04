@@ -1,7 +1,7 @@
 #include "CaseParser.hpp"
 #include "BellmanFord.hpp"
 #include "AStar.hpp"
-
+#include "FunctionTimer.hpp"
 #include <stack>
 #include <iostream>
 
@@ -46,6 +46,9 @@ int main() {
     srand(time(0));
     uint32_t destination = rand() % (adjlist.size() - 1) + 1;
 
-    testBF(adjlist, destination);
-    testAStar(adjlist, positions, destination);
+    double bftime = timer(&testBF, adjlist, destination);
+    double Atime = timer(&testAStar, adjlist, positions, destination);
+
+    std::cout << "BFTime: " << bftime << "ms" << std::endl;
+    std::cout << "ATime: " << Atime << "ms" << std::endl;
 }
